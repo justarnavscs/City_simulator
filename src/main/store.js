@@ -2,7 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const DEFAULT_SETTINGS = {
+  mapProvider: "google",
   googleMapsApiKey: "",
+  mapplsApiKey: "",
   geminiApiKey: "",
   aiMode: "gemini",
   model: "gemini-1.5-flash",

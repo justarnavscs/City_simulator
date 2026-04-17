@@ -7,7 +7,7 @@ City Simulator is a desktop application that analyzes a city for:
 - Irrigation planning
 
 It supports:
-- Google Maps API map loading for city center selection
+- Google Maps or Mappls map loading for city center selection
 - Gemini API analysis with local AI fallback
 - Web data ingestion (Open-Meteo weather + elevation)
 - Traceable, confidence-scored resilience reports
@@ -49,8 +49,12 @@ npm start
 
 ### 3) Configure keys in app settings
 
-- **Google Maps API Key** (optional, for map view):
+- **Map Provider**:
+  - Select `Google Maps` or `Mappls` in app settings
+- **Google Maps API Key** (optional, when provider is Google Maps):
   - Maps JavaScript API enabled
+- **Mappls API Key** (optional, when provider is Mappls):
+  - Advanced Maps JavaScript access enabled
 - **Gemini API Key** (optional if AI mode is local):
   - Google Generative Language API access
 

@@ -28,7 +28,14 @@
 
         <h3>AI + API Settings</h3>
         <div class="grid">
+          <label>Map Provider
+            <select id="mapProvider">
+              <option value="google">Google Maps</option>
+              <option value="mappls">Mappls</option>
+            </select>
+          </label>
           <label>Google Maps API Key <input id="googleMapsApiKey" type="password" placeholder="Optional for map view" /></label>
+          <label>Mappls API Key <input id="mapplsApiKey" type="password" placeholder="Optional for Mappls map view" /></label>
           <label>Gemini API Key <input id="geminiApiKey" type="password" placeholder="Required for Gemini mode" /></label>
           <label>AI Mode
             <select id="aiMode">
@@ -42,7 +49,7 @@
 
         <div class="actions">
           <button id="saveSettings">Save Settings</button>
-          <button id="loadMap">Load Google Map</button>
+          <button id="loadMap">Load Map</button>
           <button id="runAnalysis" class="primary">Run Analysis</button>
         </div>
         <p id="status"></p>
