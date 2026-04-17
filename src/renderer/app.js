@@ -157,6 +157,7 @@ async function loadMapplsMap() {
   el("map").innerHTML = "";
 
   map = new window.mappls.Map("map", {
+    // Mappls expects center as [lat, lng] unlike Google Maps { lat, lng }.
     center: [cityInput.latitude, cityInput.longitude],
     zoom: 11
   });
@@ -170,11 +171,6 @@ async function loadMapplsMap() {
   if (typeof marker.on === "function") {
     marker.on("dragend", (event) => {
       updateCoordinatesFromEvent(event);
-      const markerPosition = marker?.getPosition?.();
-      if (Number.isFinite(markerPosition?.lat) && Number.isFinite(markerPosition?.lng)) {
-        el("latitude").value = Number(markerPosition.lat).toFixed(4);
-        el("longitude").value = Number(markerPosition.lng).toFixed(4);
-      }
     });
   }
 
