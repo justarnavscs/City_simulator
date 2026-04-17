@@ -1,0 +1,89 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #0f1626;
+  color: #ecf0f8;
+}
+
+header {
+  padding: 1rem 1.5rem;
+  background: #1b2640;
+  border-bottom: 1px solid #2f3c5d;
+}
+
+main {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
+.card {
+  background: #151f35;
+  border: 1px solid #2b3857;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+input,
+select,
+button {
+  border-radius: 8px;
+  border: 1px solid #40517c;
+  background: #0f1626;
+  color: #ecf0f8;
+  padding: 0.5rem 0.6rem;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+button.primary {
+  background: #2b8a3e;
+  border-color: #2b8a3e;
+}
+
+#map {
+  min-height: 320px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #40517c;
+  background: #0f1626;
+}
+
+#reportOutput {
+  margin: 0;
+  white-space: pre-wrap;
+  background: #0c1322;
+  border: 1px solid #2f3c5d;
+  border-radius: 8px;
+  padding: 1rem;
+  max-height: 520px;
+  overflow: auto;
+}
+
+#status {
+  min-height: 1.2rem;
+  color: #8bd6ff;
+}
