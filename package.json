@@ -1,0 +1,67 @@
+{
+  "name": "city_simulator",
+  "version": "1.0.0",
+  "description": "Desktop city simulator for disaster resilience, green spaces, farming, and irrigation planning.",
+  "main": "src/main/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "lint": "node --check src/main/main.js && node --check src/main/ipc.js && node --check src/main/store.js && node --check src/main/cache.js && node --check src/preload/preload.js && node --check src/renderer/app.js && node --check src/core/analyzeCity.js && node --check src/core/ai/aiOrchestrator.js && node --check src/core/ai/geminiClient.js && node --check src/core/ai/localAiClient.js && node --check src/core/dataSources/webDataService.js && node --check src/core/simulation/disasterRisk.js && node --check src/core/simulation/landPlanning.js",
+    "test": "node --test",
+    "build": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justarnavscs/City_simulator.git"
+  },
+  "keywords": [
+    "electron",
+    "city",
+    "simulation",
+    "gemini",
+    "google-maps"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justarnavscs/City_simulator/issues"
+  },
+  "homepage": "https://github.com/justarnavscs/City_simulator#readme",
+  "devDependencies": {
+    "electron": "^41.2.1",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.citysimulator.desktop",
+    "productName": "City Simulator",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "README.md"
+    ],
+    "extraMetadata": {
+      "main": "src/main/main.js"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Science"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
+  }
+}
