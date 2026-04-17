@@ -43,13 +43,18 @@ function applySettings(settings) {
 }
 
 async function loadScriptOnce({ id, src, errorMessage }) {
-  if (document.getElementById(id)) {
-    return;
+  const existingScript = document.getElementById(id);
+  if (existingScript) {
+    if (existingScript.dataset.src === src) {
+      return;
+    }
+    existingScript.remove();
   }
 
   await new Promise((resolve, reject) => {
     const script = document.createElement("script");
     script.id = id;
+    script.dataset.src = src;
     script.src = src;
     script.async = true;
     script.defer = true;
@@ -79,6 +84,21 @@ function updateCoordinatesFromEvent(event) {
   }
 }
 
+function resetMapContainer() {
+  if (typeof marker?.setMap === "function") {
+    marker.setMap(null);
+  }
+  if (typeof marker?.remove === "function") {
+    marker.remove();
+  }
+  if (typeof map?.remove === "function") {
+    map.remove();
+  }
+  marker = undefined;
+  map = undefined;
+  el("map").innerHTML = "";
+}
+
 function renderReport(report) {
   const output = {
     city: report.city,
@@ -105,17 +125,14 @@ async function loadGoogleMap() {
     return;
   }
 
-  if (!window.google?.maps) {
-    await loadScriptOnce({
-      id: "google-maps-sdk",
-      src: `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}`,
-      errorMessage: "Unable to load Google Maps script."
-    });
-  }
+  await loadScriptOnce({
+    id: "google-maps-sdk",
+    src: `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}`,
+    errorMessage: "Unable to load Google Maps script."
+  });
 
   const cityInput = readCityInput();
   const center = { lat: cityInput.latitude, lng: cityInput.longitude };
-  el("map").innerHTML = "";
 
   map = new window.google.maps.Map(el("map"), {
     center,
@@ -145,16 +162,13 @@ async function loadMapplsMap() {
     return;
   }
 
-  if (!window.mappls?.Map) {
-    await loadScriptOnce({
-      id: "mappls-sdk",
-      src: `https://apis.mappls.com/advancedmaps/v1/${encodeURIComponent(apiKey)}/map_load?v=1.5`,
-      errorMessage: "Unable to load Mappls script."
-    });
-  }
+  await loadScriptOnce({
+    id: "mappls-sdk",
+    src: `https://apis.mappls.com/advancedmaps/v1/${encodeURIComponent(apiKey)}/map_load?v=1.5`,
+    errorMessage: "Unable to load Mappls script."
+  });
 
   const cityInput = readCityInput();
-  el("map").innerHTML = "";
 
   map = new window.mappls.Map("map", {
     // Mappls expects center as [lat, lng] unlike Google Maps { lat, lng }.
@@ -178,6 +192,8 @@ async function loadMapplsMap() {
 }
 
 async function loadMap() {
+  resetMapContainer();
+
   if (el("mapProvider").value === "mappls") {
     await loadMapplsMap();
     return;
